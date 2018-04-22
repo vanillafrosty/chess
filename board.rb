@@ -21,6 +21,13 @@ class Board
   end
 
   def initial_setup
+    #note: we're setting up the board Cartesian coordinate style
+    #x-axis is horizontal, y-axis is vertical. so [0,1], and [1,1]
+    #are on the same row (y-axis). when represented in a Ruby 2D array,
+    #cartesian coordinates on the same y-axis END UP ON DIFFERENT
+    #arrays. (board[0][1] and board[1][1] exist in two different arrays.)
+    #we need to take this into account when printing the board in display.rb
+    #just semantics, but needed to be noted. 
     @grid.each_with_index do |row,row_idx|
       return if row_idx > 1 #return after making pawns
       row.each_with_index do |square,col_idx|

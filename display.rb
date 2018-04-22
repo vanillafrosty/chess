@@ -50,6 +50,8 @@ class Display
   end
 
   def print_board
+    #transpose the board here because we were stuffing pieces into
+    #the board based on Cartesian coordinates. see notes in board.rb
     @board.grid.transpose.each_with_index do |row, i|
       row.each_with_index do |square, j|
         bg_color = get_bg_color(i,j)
