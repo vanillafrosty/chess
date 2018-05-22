@@ -4,10 +4,10 @@ require_relative "human_player"
 class Game
 
   def initialize
-    @display = Display.new
-    @player1 = HumanPlayer.new("Jeff")
-    @player2 = HumanPlayer.new("Fred")
+    @player1 = HumanPlayer.new("Jeff", :W)
+    @player2 = HumanPlayer.new("Fred", :BLK)
     @current_player = @player1
+    @display = Display.new(@current_player)
   end
 
   def play
@@ -15,9 +15,10 @@ class Game
     until game_over?
       begin
         @current_player.make_move(@display)
-      rescue
-        puts "Invalid move"
-        sleep(1)
+      rescue ArgumentError => e
+        puts e.message
+        #"Invalid move"
+        sleep(1.5)
         @display.start_pos = nil
         @display.end_pos = nil
         retry
@@ -39,6 +40,7 @@ class Game
     else
       @display.cursor.cursor_pos = [7,0]
     end
+    @display.board.current_player = @current_player
   end
 end
 

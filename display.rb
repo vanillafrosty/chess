@@ -4,8 +4,8 @@ require_relative 'board'
 
 class Display
   attr_accessor :cursor, :board, :start_pos, :end_pos
-  def initialize
-    @board = Board.new
+  def initialize(player)
+    @board = Board.new(player)
     @cursor = Cursor.new([7,0], @board)
     @start_pos = nil
     @end_pos = nil

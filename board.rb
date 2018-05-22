@@ -12,8 +12,10 @@ require_relative 'pawn'
 
 class Board
   attr_reader :grid
+  attr_accessor :current_player
 
-  def initialize
+  def initialize(player=nil)
+    @current_player = player
     @grid = Array.new(8) { Array.new(8) { NullPiece.instance } }
     initial_setup
     @w_kings_pos = [4,7]
@@ -90,6 +92,13 @@ class Board
 
   def move_piece(start_pos, end_pos)
     # debugger
+    #self[start_pos] is a piece, it has a .color
+    #we can make validate_color! a method on the humanPlayer class
+    #instance. we need to track current player, though. maybe put it
+    #as an instance variable on the board.
+    if !current_player.nil?
+      validate_color!(@current_player, self[start_pos].color)
+    end
     validate!(start_pos,end_pos)
     valid_moves_arr = self[start_pos].valid_moves
     if valid_moves_arr.include?(end_pos)
@@ -101,7 +110,7 @@ class Board
       end
     else
 
-      raise 'Invalid move'
+      raise ArgumentError.new('Invalid move!')
 
     end
   end
@@ -115,6 +124,13 @@ class Board
     if self[end_pos].is_a?(King)
       self[end_pos].color == :W ? @w_kings_pos=end_pos : @b_kings_pos=end_pos
     end
+  end
+
+  def validate_color!(player, color)
+    if player.color != color
+      raise ArgumentError.new("#{player.name}, you cannot move a piece that isn't yours")
+    end
+    true
   end
 
   def validate!(start_pos,end_pos)
