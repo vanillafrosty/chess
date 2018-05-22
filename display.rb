@@ -3,12 +3,13 @@ require_relative 'cursor'
 require_relative 'board'
 
 class Display
-  attr_accessor :cursor, :board, :start_pos, :end_pos
+  attr_accessor :cursor, :board, :start_pos, :end_pos, :current_player
   def initialize(player)
     @board = Board.new(player)
     @cursor = Cursor.new([7,0], @board)
     @start_pos = nil
     @end_pos = nil
+    @current_player = player
 
   end
 
@@ -16,6 +17,7 @@ class Display
     while true
       system("clear")
       print_board
+      puts "#{@current_player.name}'s turn (#{@current_player.color_str})!"
       if playing
         case receive_input
         when -1

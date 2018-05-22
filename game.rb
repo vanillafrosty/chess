@@ -12,10 +12,10 @@ class Game
   end
 
   def create_players
-    puts "Enter name for player 1: "
+    puts "Enter name for player 1 (white): "
     input = gets.chomp.strip
     @player1 = Player.new(input, :W)
-    puts "Enter name for player 2: "
+    puts "Enter name for player 2 (black): "
     input = gets.chomp.strip
     @player2 = Player.new(input, :BLK)
   end
@@ -50,6 +50,7 @@ class Game
     else
       @display.cursor.cursor_pos = [7,0]
     end
+    @display.current_player = @current_player
     @display.board.current_player = @current_player
   end
 end
