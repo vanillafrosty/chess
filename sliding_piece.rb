@@ -1,5 +1,6 @@
 require 'byebug'
 require_relative "stepping_piece"
+
 module SlidingPiece
 
   include SteppingPiece
