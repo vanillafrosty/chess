@@ -4,10 +4,20 @@ require_relative "human_player"
 class Game
 
   def initialize
-    @player1 = HumanPlayer.new("Jeff", :W)
-    @player2 = HumanPlayer.new("Fred", :BLK)
+    create_players
+    # @player1 = HumanPlayer.new("Jeff", :W)
+    # @player2 = HumanPlayer.new("Fred", :BLK)
     @current_player = @player1
     @display = Display.new(@current_player)
+  end
+
+  def create_players
+    puts "Enter name for player 1: "
+    input = gets.chomp.strip
+    @player1 = HumanPlayer.new(input, :W)
+    puts "Enter name for player 2: "
+    input = gets.chomp.strip
+    @player2 = HumanPlayer.new(input, :BLK)
   end
 
   def play
