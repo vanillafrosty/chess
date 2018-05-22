@@ -1,5 +1,5 @@
 require_relative "display"
-require_relative "human_player"
+require_relative "player"
 
 class Game
 
@@ -14,10 +14,10 @@ class Game
   def create_players
     puts "Enter name for player 1: "
     input = gets.chomp.strip
-    @player1 = HumanPlayer.new(input, :W)
+    @player1 = Player.new(input, :W)
     puts "Enter name for player 2: "
     input = gets.chomp.strip
-    @player2 = HumanPlayer.new(input, :BLK)
+    @player2 = Player.new(input, :BLK)
   end
 
   def play
