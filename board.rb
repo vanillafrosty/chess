@@ -91,7 +91,6 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    # debugger
     #self[start_pos] is a piece, it has a .color
     #we can make validate_color! a method on the humanPlayer class
     #instance. we need to track current player, though. maybe put it

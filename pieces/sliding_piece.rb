@@ -7,7 +7,6 @@ module SlidingPiece
 
 
   def moves(move_dirs_arr)
-    # debugger
     output = []
     starting_pos = pos
     move_dirs_arr.each do |dir|
